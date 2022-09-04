@@ -1,15 +1,21 @@
 import "./App.css";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
-const DiaryEditor = () => {
+const DiaryEditor = ({ onCreate }) => {
+  useEffect(() => {
+    console.log("DiaryEditor Render");
+  });
+
   const authorInput = useRef();
   const contentInput = useRef();
+
   const [state, setState] = useState({
     author: "",
     content: "",
     emotion: 1,
   });
+
   const onChange = (e) => {
     const { value, name } = e.target;
     setState({
@@ -17,17 +23,28 @@ const DiaryEditor = () => {
       [name]: value,
     });
   };
+
   const onSubmit = () => {
     if (state.author.length < 1) {
       authorInput.current.focus();
       return;
     }
+
     if (state.content.length < 5) {
       contentInput.current.focus();
       return;
     }
+
+    onCreate(state.author, state.content, state.emotion);
     alert("저장 성공");
+
+    setState({
+      author: "",
+      content: "",
+      emotion: 1,
+    });
   };
+
   return (
     <div className="DiaryEditor">
       <h2>오늘의 일기</h2>
@@ -64,4 +81,4 @@ const DiaryEditor = () => {
   );
 };
 
-export default DiaryEditor;
+export default React.memo(DiaryEditor);
