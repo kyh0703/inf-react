@@ -74,7 +74,7 @@ const App = () => {
   }, []);
 
   const onRemove = useCallback((targetId) => {
-    onRemove({ type: "REMOVE", targetId });
+    dispatch({ type: "REMOVE", targetId });
   }, []);
 
   const onEdit = useCallback((targetId, newContent) => {
@@ -84,6 +84,7 @@ const App = () => {
   const memoizedDispatches = useMemo(() => {
     return { onCreate, onRemove, onEdit };
   }, []);
+
   const getDiaryAnalysis = useMemo(() => {
     if (data.length === 0) {
       return { goodcount: 0, badCount: 0, goodRatio: 0 };
@@ -102,12 +103,12 @@ const App = () => {
     <DiaryStateContext.Provider value={data}>
       <DiaryDispatchContext.Provider value={memoizedDispatches}>
         <div className="App">
-          <DiaryEditor onCreate={onCreate} />
+          <DiaryEditor />
           <div>전체 일기 : {data.length}</div>
           <div>기분 좋은 일기 개수 : {goodCount}</div>
           <div>기분 나쁜 일기 개수 : {badCount}</div>
           <div>기분 좋은 일기 비율 : {goodRatio}</div>
-          <DiaryList onEdit={onEdit} onRemove={onRemove} />
+          <DiaryList />
         </div>
       </DiaryDispatchContext.Provider>
     </DiaryStateContext.Provider>

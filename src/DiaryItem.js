@@ -1,17 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { DiaryDispatchContext } from "./App";
 
-const DiaryItem = ({
-  onUpdate,
-  onRemove,
-  id,
-  author,
-  content,
-  emotion,
-  created_date,
-}) => {
-  useEffect(() => {
-    console.log(`${id} 번째 아이템 렌더`);
-  }, []);
+const DiaryItem = ({ id, author, content, emotion, created_date }) => {
+  const { onRemove, onEdit } = useContext(DiaryDispatchContext);
 
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => setIsEdit(!isEdit);
@@ -37,7 +28,7 @@ const DiaryItem = ({
     }
 
     if (window.confirm(`${id} 번 째 일기를 수정하시겠습니까?`)) {
-      onUpdate(id, localContent);
+      onEdit(id, localContent);
       toggleIsEdit();
     }
   };
