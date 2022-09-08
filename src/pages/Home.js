@@ -6,10 +6,15 @@ const Home = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   console.log(currentDate);
 
+  const headText = `${currentDate.getFullYear()}년 ${
+    currentDate.getMonth() + 1
+  }월`;
+
   return (
     <div>
       <MyHeader
         leftChild={<MyButton text={"<"} />}
+        headText={headText}
         rightChild={<MyButton text={">"} />}
       />
     </div>
