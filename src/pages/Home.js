@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import MyHeader from "../components/MyHeader";
+import MyButton from "../components/MyButton";
 
 const Home = () => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  console.log(currentDate);
+
   return (
     <div>
-      <h1>Home</h1>
-      <p>이것은 Home</p>
+      <MyHeader
+        leftChild={<MyButton text={"<"} />}
+        rightChild={<MyButton text={">"} />}
+      />
     </div>
   );
 };
