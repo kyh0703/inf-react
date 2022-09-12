@@ -12,6 +12,7 @@ const Home = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
+    console.log("useEffect", diaryList);
     if (diaryList.length >= 1) {
       const firstDay = new Date(
         currentDate.getFullYear(),

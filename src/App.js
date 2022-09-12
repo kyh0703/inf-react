@@ -23,8 +23,9 @@ const reducer = (state, action) => {
     }
     case "EDIT": {
       newState = state.map((it) =>
-        it.id === action.id ? { ...action.data } : action
+        it.id === action.data.id ? { ...action.data } : it
       );
+      console.log("debug!", newState);
       break;
     }
     default:
@@ -108,14 +109,14 @@ const App = () => {
 
   return (
     <DiaryStateContext.Provider value={data}>
-      <DiaryDispatchContext.Provider value={(onCreate, onRemove, onEdit)}>
+      <DiaryDispatchContext.Provider value={{ onCreate, onRemove, onEdit }}>
         <BrowserRouter>
           <div className="App">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/edit" element={<Edit />} />
               <Route path="/new" element={<New />} />
-              <Route path="/diary" element={<Diary />} />
+              <Route path="/edit/:id" element={<Edit />} />
+              <Route path="/diary/:id" element={<Diary />} />
             </Routes>
           </div>
         </BrowserRouter>
