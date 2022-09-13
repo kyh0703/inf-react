@@ -25,7 +25,6 @@ const reducer = (state, action) => {
       newState = state.map((it) =>
         it.id === action.data.id ? { ...action.data } : it
       );
-      console.log("debug!", newState);
       break;
     }
     default:
@@ -74,7 +73,7 @@ const dummyData = [
 const App = () => {
   const [data, dispatch] = useReducer(reducer, dummyData);
 
-  const dataId = useRef(0);
+  const dataId = useRef(6);
 
   //CREATE
   const onCreate = (date, content, emotion) => {
